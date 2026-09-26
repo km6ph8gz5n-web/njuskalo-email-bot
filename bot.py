@@ -528,7 +528,11 @@ async def main() -> None:
     dp.include_router(router)
 
     logger.info("Бот запущен")
-    await dp.start_polling(bot)
+    try:
+        await dp.start_polling(bot)
+    except Exception as e:
+        logger.error("Ошибка polling: %s", e)
+        raise
 
 
 if __name__ == "__main__":
